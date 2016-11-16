@@ -1,0 +1,162 @@
+{
+	"swagger" : "2.0",
+	"info" : {
+		"description" : "WFO API",
+		"version" : "1.0",
+		"title" : "WFO Service",
+		"license" : {
+			"name" : "Apache License Version 2.0"
+		}
+	},
+	"host" : "localhost:8081",
+	"basePath" : "/WFO",
+	"tags" : [{
+			"name" : "wfo-controller",
+			"description" : "WFO Controller"
+		}
+	],
+	"paths" : {
+		"/api/list" : {
+			"get" : {
+				"tags" : ["wfo-controller"],
+				"summary" : "list",
+				"operationId" : "list",
+				"consumes" : ["application/json"],
+				"produces" : ["*/*"],
+				"responses" : {
+					"200" : {
+						"description" : "OK",
+						"schema" : {
+							"type" : "array",
+							"items" : {
+								"$ref" : "#/definitions/WFODTO"
+							}
+						}
+					},
+					"401" : {
+						"description" : "Unauthorized"
+					},
+					"403" : {
+						"description" : "Forbidden"
+					},
+					"404" : {
+						"description" : "Not Found"
+					}
+				}
+			}
+		},
+		"/api/{id}" : {
+			"get" : {
+				"tags" : ["wfo-controller"],
+				"summary" : "readById",
+				"operationId" : "readById",
+				"consumes" : ["application/json"],
+				"produces" : ["*/*"],
+				"parameters" : [{
+						"name" : "id",
+						"in" : "path",
+						"description" : "id",
+						"required" : true,
+						"type" : "string"
+					}
+				],
+				"responses" : {
+					"200" : {
+						"description" : "OK",
+						"schema" : {
+							"$ref" : "#/definitions/WFODTO"
+						}
+					},
+					"401" : {
+						"description" : "Unauthorized"
+					},
+					"403" : {
+						"description" : "Forbidden"
+					},
+					"404" : {
+						"description" : "Not Found"
+					}
+				}
+			}
+		},
+		"/api/{latitude}/{longitude}/coordinates" : {
+			"get" : {
+				"tags" : ["wfo-controller"],
+				"summary" : "readByLocation",
+				"operationId" : "readByLocation",
+				"consumes" : ["application/json"],
+				"produces" : ["*/*"],
+				"parameters" : [{
+						"name" : "latitude",
+						"in" : "path",
+						"description" : "latitude",
+						"required" : true,
+						"type" : "double"
+					},{
+						"name" : "longitude",
+						"in" : "path",
+						"description" : "longitude",
+						"required" : true,
+						"type" : "double"
+					}
+				],
+				"responses" : {
+					"200" : {
+						"description" : "OK",
+						"schema" : {
+							"type" : "array",
+							"items" : {
+								"$ref" : "#/definitions/WFODTO"
+							}
+						}
+					},
+					"401" : {
+						"description" : "Unauthorized"
+					},
+					"403" : {
+						"description" : "Forbidden"
+					},
+					"404" : {
+						"description" : "Not Found"
+					}
+				}
+			}
+		}
+	},
+	"definitions" : {
+		"WFODTO" : {
+			"type" : "object",
+			"properties" : {
+				"cwa" : {
+					"type" : "string"
+				},
+				"wfo" : {
+					"type" : "string"
+				},
+				"latitude" : {
+					"type" : "number",
+					"format" : "double"
+				},
+				"longitude" : {
+					"type" : "number",
+					"format" : "double"
+				},
+				"region" : {
+					"type" : "string"
+				},
+				"fullStationId" : {
+					"type" : "string"
+				},
+				"cityState" : {
+					"type" : "string"
+				},
+				"city" : {
+					"type" : "string"
+				},
+				"state" : {
+					"type" : "string"
+				}
+			}
+		}
+	}
+}

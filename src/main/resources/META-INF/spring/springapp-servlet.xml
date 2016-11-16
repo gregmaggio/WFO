@@ -23,8 +23,7 @@
 	</bean>
      
     <!-- Controllers -->
-	<bean name="wfoController" class="ca.datamagic.wfo.controller.WFOController" />
-	<bean id="documentationConfig" class="com.mangofactory.swagger.configuration.SpringSwaggerConfig"/>
+	<bean name="wfoController" class="ca.datamagic.wfo.controller.IndexController" />
     
     <context:annotation-config />
     

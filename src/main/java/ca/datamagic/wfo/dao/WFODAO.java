@@ -27,13 +27,14 @@ import ca.datamagic.wfo.inject.MemoryCache;
  * @author Greg
  *
  */
-public class WFODAO {
+public class WFODAO extends BaseDAO {
 	private static Logger _logger = LogManager.getLogger(WFODAO.class);
-	private static String _fileName = null;
+	private String _fileName = null;
 	private String _typeName = null; 
 	private SimpleFeatureSource _featureSource = null;
 	
 	public WFODAO() throws IOException {
+		_fileName = MessageFormat.format("{0}/w_10nv15/w_10nv15.shp", getDataPath());
 		HashMap<Object, Object> connect = new HashMap<Object, Object>();
 		connect.put("url", "file://" + _fileName);
 		DataStore dataStore = DataStoreFinder.getDataStore(connect);
@@ -42,14 +43,6 @@ public class WFODAO {
 		SimpleFeatureSource featureSource = dataStore.getFeatureSource(typeName);
 		_typeName = typeName;
 		_featureSource = featureSource;
-	}
-	
-	public static synchronized String getFileName() {
-		return _fileName;
-	}
-	
-	public static synchronized void setFileName(String newVal) {
-		_fileName = newVal;
 	}
 	
 	@MemoryCache

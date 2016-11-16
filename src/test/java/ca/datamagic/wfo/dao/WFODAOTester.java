@@ -3,7 +3,6 @@
  */
 package ca.datamagic.wfo.dao;
 
-import java.io.File;
 import java.util.List;
 
 import org.apache.log4j.xml.DOMConfigurator;
@@ -20,7 +19,6 @@ public class WFODAOTester {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		DOMConfigurator.configure("src/test/resources/META-INF/log4j.cfg.xml");
-		WFODAO.setFileName((new File("src/main/resources/META-INF/data/w_10nv15/w_10nv15.shp")).getAbsolutePath());
 	}
 
 	@Test
