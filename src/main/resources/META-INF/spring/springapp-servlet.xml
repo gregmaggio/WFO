@@ -23,7 +23,9 @@
 	</bean>
      
     <!-- Controllers -->
-	<bean name="wfoController" class="ca.datamagic.wfo.controller.IndexController" />
+	<bean name="indexController" class="ca.datamagic.wfo.controller.IndexController" />
+	<bean name="wfoController" class="ca.datamagic.wfo.controller.WFOController" />
+	<bean name="stationController" class="ca.datamagic.wfo.controller.StationController" />
     
     <context:annotation-config />
     

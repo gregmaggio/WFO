@@ -13,10 +13,13 @@
 	"tags" : [{
 			"name" : "wfo-controller",
 			"description" : "WFO Controller"
+		}, {
+			"name" : "station-controller",
+			"description" : "Station Controller"
 		}
 	],
 	"paths" : {
-		"/api/list" : {
+		"/api/wfo/list" : {
 			"get" : {
 				"tags" : ["wfo-controller"],
 				"summary" : "list",
@@ -45,7 +48,7 @@
 				}
 			}
 		},
-		"/api/{id}" : {
+		"/api/wfo/{id}" : {
 			"get" : {
 				"tags" : ["wfo-controller"],
 				"summary" : "readById",
@@ -79,7 +82,7 @@
 				}
 			}
 		},
-		"/api/{latitude}/{longitude}/coordinates" : {
+		"/api/wfo/{latitude}/{longitude}/coordinates" : {
 			"get" : {
 				"tags" : ["wfo-controller"],
 				"summary" : "readByLocation",
@@ -108,6 +111,149 @@
 							"items" : {
 								"$ref" : "#/definitions/WFODTO"
 							}
+						}
+					},
+					"401" : {
+						"description" : "Unauthorized"
+					},
+					"403" : {
+						"description" : "Forbidden"
+					},
+					"404" : {
+						"description" : "Not Found"
+					}
+				}
+			}
+		},
+		"/api/station/list" : {
+			"get" : {
+				"tags" : ["station-controller"],
+				"summary" : "list",
+				"operationId" : "list",
+				"consumes" : ["application/json"],
+				"produces" : ["*/*"],
+				"responses" : {
+					"200" : {
+						"description" : "OK",
+						"schema" : {
+							"type" : "array",
+							"items" : {
+								"$ref" : "#/definitions/StationDTO"
+							}
+						}
+					},
+					"401" : {
+						"description" : "Unauthorized"
+					},
+					"403" : {
+						"description" : "Forbidden"
+					},
+					"404" : {
+						"description" : "Not Found"
+					}
+				}
+			}
+		},
+		"/api/station/{id}" : {
+			"get" : {
+				"tags" : ["station-controller"],
+				"summary" : "readById",
+				"operationId" : "readById",
+				"consumes" : ["application/json"],
+				"produces" : ["*/*"],
+				"parameters" : [{
+						"name" : "id",
+						"in" : "path",
+						"description" : "id",
+						"required" : true,
+						"type" : "string"
+					}
+				],
+				"responses" : {
+					"200" : {
+						"description" : "OK",
+						"schema" : {
+							"$ref" : "#/definitions/StationDTO"
+						}
+					},
+					"401" : {
+						"description" : "Unauthorized"
+					},
+					"403" : {
+						"description" : "Forbidden"
+					},
+					"404" : {
+						"description" : "Not Found"
+					}
+				}
+			}
+		},
+		"/api/station/{latitude}/{longitude}/nearest" : {
+			"get" : {
+				"tags" : ["station-controller"],
+				"summary" : "readNearest",
+				"operationId" : "readNearest",
+				"consumes" : ["application/json"],
+				"produces" : ["*/*"],
+				"parameters" : [{
+						"name" : "latitude",
+						"in" : "path",
+						"description" : "latitude",
+						"required" : true,
+						"type" : "double"
+					},{
+						"name" : "longitude",
+						"in" : "path",
+						"description" : "longitude",
+						"required" : true,
+						"type" : "double"
+					}
+				],
+				"responses" : {
+					"200" : {
+						"description" : "OK",
+						"schema" : {
+							"$ref" : "#/definitions/StationDTO"
+						}
+					},
+					"401" : {
+						"description" : "Unauthorized"
+					},
+					"403" : {
+						"description" : "Forbidden"
+					},
+					"404" : {
+						"description" : "Not Found"
+					}
+				}
+			}
+		},
+		"/api/station/{latitude}/{longitude}/nearestWithRadiosonde" : {
+			"get" : {
+				"tags" : ["station-controller"],
+				"summary" : "readNearestWithRadiosonde",
+				"operationId" : "readNearestWithRadiosonde",
+				"consumes" : ["application/json"],
+				"produces" : ["*/*"],
+				"parameters" : [{
+						"name" : "latitude",
+						"in" : "path",
+						"description" : "latitude",
+						"required" : true,
+						"type" : "double"
+					},{
+						"name" : "longitude",
+						"in" : "path",
+						"description" : "longitude",
+						"required" : true,
+						"type" : "double"
+					}
+				],
+				"responses" : {
+					"200" : {
+						"description" : "OK",
+						"schema" : {
+							"$ref" : "#/definitions/StationDTO"
 						}
 					},
 					"401" : {
@@ -155,6 +301,31 @@
 				},
 				"state" : {
 					"type" : "string"
+				}
+			}
+		},
+		"StationDTO" : {
+			"type" : "object",
+			"properties" : {
+				"stationId" : {
+					"type" : "string"
+				},
+				"stationName" : {
+					"type" : "string"
+				},
+				"state" : {
+					"type" : "string"
+				},
+				"latitude" : {
+					"type" : "number",
+					"format" : "double"
+				},
+				"longitude" : {
+					"type" : "number",
+					"format" : "double"
+				},
+				"hasRadiosonde" : {
+					"type" : "boolean"
 				}
 			}
 		}
