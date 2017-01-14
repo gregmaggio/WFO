@@ -3,7 +3,10 @@
  */
 package ca.datamagic.wfo.controller;
 
+import java.net.URI;
+import java.net.URLDecoder;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,10 +17,12 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import ca.datamagic.wfo.dao.BaseDAO;
 import ca.datamagic.wfo.dao.StationDAO;
@@ -56,7 +61,41 @@ public class StationController {
 	@ResponseBody
     public List<StationDTO> list(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		try {
-			return _dao.list();
+			StringBuffer requestURL = request.getRequestURL();
+		    String queryString = request.getQueryString();
+		    if ((queryString != null) && (queryString.length() > 0)) {
+		        requestURL.append("?");
+		        requestURL.append(queryString);
+		    }
+			String requestURI = requestURL.toString();
+			_logger.debug("requestURI: " + requestURI);			
+			MultiValueMap<String, String> queryParameters = UriComponentsBuilder.fromUri(new URI(requestURI)).build().getQueryParams();
+			String city = null;
+			String state = null;
+			String zip = null;
+			boolean hasRadisonde = false;
+			Set<String> queryKeys = queryParameters.keySet();
+			for (String key : queryKeys) {
+				_logger.debug("key: " + key);
+				String value = null;
+				List<String> values = queryParameters.get(key);
+				if ((values != null) && (values.size() > 0)) {
+					value = URLDecoder.decode(values.get(0), "UTF-8");
+				}
+				if ((value != null) && (value.length() > 0)) {
+					_logger.debug("value: " + value);
+					if (key.compareToIgnoreCase("city") == 0) {
+						city = value;
+					} else if (key.compareToIgnoreCase("state") == 0) {
+						state = value;
+					} else if (key.compareToIgnoreCase("zip") == 0) {
+						zip = value;
+					} else if (key.compareToIgnoreCase("hasRadisonde") == 0) {
+						hasRadisonde = Boolean.parseBoolean(value);
+					}
+				}
+			}
+			return _dao.list(city, state, zip, hasRadisonde);
 		} catch (Throwable t) {
 			_logger.error("Exception", t);
 			throw new Exception(t);

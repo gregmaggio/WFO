@@ -14,7 +14,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class StationDTO {
 	private String _stationId = null;
 	private String _stationName = null;
+	private String _streetNumber = null;
+	private String _streetName = null;
+	private String _city = null;
 	private String _state = null;
+	private String _zip = null;
+	private String _countryCode = null;
+	private String _countryName = null;
 	private Double _latitude = null;
 	private Double _longitude = null;
 	private Boolean _hasRadiosonde = null;
@@ -24,8 +30,14 @@ public class StationDTO {
 
 	public StationDTO(SimpleFeature feature) {
 		_stationId = (String)feature.getAttribute("station_id");
-		_stationName = (String)feature.getAttribute("station_na");
+		_stationName = (String)feature.getAttribute("name");
+		_streetNumber = (String)feature.getAttribute("street_no");
+		_streetName = (String)feature.getAttribute("street");
+		_city = (String)feature.getAttribute("city");
 		_state = (String)feature.getAttribute("state");
+		_zip = (String)feature.getAttribute("zip");
+		_countryCode = (String)feature.getAttribute("country_cd");
+		_countryName = (String)feature.getAttribute("country");
 		_longitude = (Double)feature.getAttribute("latitude");
 		_latitude = (Double)feature.getAttribute("longitude");
 		_hasRadiosonde = ((String)feature.getAttribute("has_rad")).compareToIgnoreCase("Y") == 0;
@@ -39,8 +51,32 @@ public class StationDTO {
 		return _stationName;
 	}
 	
+	public String getStreetNumber() {
+		return _streetNumber;
+	}
+	
+	public String getStreetName() {
+		return _streetName;
+	}
+	
+	public String getCity() {
+		return _city;
+	}
+	
 	public String getState() {
 		return _state;
+	}
+	
+	public String getZip() {
+		return _zip;
+	}
+	
+	public String getCountryCode() {
+		return _countryCode;
+	}
+	
+	public String getCountryName() {
+		return _countryName;
 	}
 	
 	public Double getLatitude() {
@@ -64,8 +100,32 @@ public class StationDTO {
 		_stationName = newVal;
 	}
 	
+	public void setStreetNumber(String newVal) {
+		_streetNumber = newVal;
+	}
+	
+	public void setStreetName(String newVal) {
+		_streetName = newVal;
+	}
+	
+	public void setCity(String newVal) {
+		_city = newVal;
+	}
+	
 	public void setState(String newVal) {
 		_state = newVal;
+	}
+	
+	public void setZip(String newVal) {
+		_zip = newVal;
+	}
+	
+	public void setCountryCode(String newVal) {
+		_countryCode = newVal;
+	}
+	
+	public void setCountryName(String newVal) {
+		_countryName = newVal;
 	}
 	
 	public void setLatitude(Double newVal) {

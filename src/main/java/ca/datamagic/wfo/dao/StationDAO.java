@@ -68,6 +68,123 @@ public class StationDAO extends BaseDAO {
 	}
 	
 	@MemoryCache
+	public List<StationDTO> list(boolean hasRadisonde) throws IOException, CQLException {
+		StringBuffer filter = new StringBuffer();
+		if (hasRadisonde) {
+			if (filter.length() > 0) {
+				filter.append(" AND ");
+			}
+			filter.append("has_rad = 'Y'");
+		}
+		if (filter.length() < 1)
+			return list();
+		_logger.debug("filter: " + filter.toString());
+		Query query = new Query(_typeName, CQL.toFilter(filter.toString()));
+		SimpleFeatureCollection collection = _featureSource.getFeatures(query);
+		SimpleFeatureIterator iterator = null;
+		try {
+			List<StationDTO> items = new ArrayList<StationDTO>();
+			iterator = collection.features();
+			while (iterator.hasNext()) {
+				items.add(new StationDTO(iterator.next()));
+			}
+			return items;
+		} finally {
+			if (iterator != null) {
+				iterator.close();
+			}
+		}
+	}
+	
+	@MemoryCache
+	public List<StationDTO> list(String city, String state, String zip) throws IOException, CQLException {
+		StringBuffer filter = new StringBuffer();
+		if ((city != null) && (city.length() > 0)) {
+			if (filter.length() > 0) {
+				filter.append(" AND ");
+			}
+			filter.append(MessageFormat.format("city = {0}", "'" + city + "'"));
+		}
+		if ((state != null) && (state.length() > 0)) {
+			if (filter.length() > 0) {
+				filter.append(" AND ");
+			}
+			filter.append(MessageFormat.format("state = {0}", "'" + state + "'"));
+		}
+		if ((zip != null) && (zip.length() > 0)) {
+			if (filter.length() > 0) {
+				filter.append(" AND ");
+			}
+			filter.append(MessageFormat.format("zip = {0}", "'" + zip + "'"));
+		}
+		if (filter.length() < 1)
+			return list();
+		_logger.debug("filter: " + filter.toString());
+		Query query = new Query(_typeName, CQL.toFilter(filter.toString()));
+		SimpleFeatureCollection collection = _featureSource.getFeatures(query);
+		SimpleFeatureIterator iterator = null;
+		try {
+			List<StationDTO> items = new ArrayList<StationDTO>();
+			iterator = collection.features();
+			while (iterator.hasNext()) {
+				items.add(new StationDTO(iterator.next()));
+			}
+			return items;
+		} finally {
+			if (iterator != null) {
+				iterator.close();
+			}
+		}
+	}
+	
+	@MemoryCache
+	public List<StationDTO> list(String city, String state, String zip, boolean hasRadisonde) throws IOException, CQLException {
+		StringBuffer filter = new StringBuffer();
+		if ((city != null) && (city.length() > 0)) {
+			if (filter.length() > 0) {
+				filter.append(" AND ");
+			}
+			filter.append(MessageFormat.format("city = {0}", "'" + city + "'"));
+		}
+		if ((state != null) && (state.length() > 0)) {
+			if (filter.length() > 0) {
+				filter.append(" AND ");
+			}
+			filter.append(MessageFormat.format("state = {0}", "'" + state + "'"));
+		}
+		if ((zip != null) && (zip.length() > 0)) {
+			if (filter.length() > 0) {
+				filter.append(" AND ");
+			}
+			filter.append(MessageFormat.format("zip = {0}", "'" + zip + "'"));
+		}
+		if (hasRadisonde) {
+			if (filter.length() > 0) {
+				filter.append(" AND ");
+			}
+			filter.append("has_rad = 'Y'");
+		}
+		if (filter.length() < 1)
+			return list();
+		_logger.debug("filter: " + filter.toString());
+		Query query = new Query(_typeName, CQL.toFilter(filter.toString()));
+		SimpleFeatureCollection collection = _featureSource.getFeatures(query);
+		SimpleFeatureIterator iterator = null;
+		try {
+			List<StationDTO> items = new ArrayList<StationDTO>();
+			iterator = collection.features();
+			while (iterator.hasNext()) {
+				items.add(new StationDTO(iterator.next()));
+			}
+			return items;
+		} finally {
+			if (iterator != null) {
+				iterator.close();
+			}
+		}
+	}
+	
+	@MemoryCache
 	public StationDTO read(String id) throws IOException, CQLException {
 		String filter = MessageFormat.format("station_id = {0}", "'" + id + "'");
 		_logger.debug("filter: " + filter);

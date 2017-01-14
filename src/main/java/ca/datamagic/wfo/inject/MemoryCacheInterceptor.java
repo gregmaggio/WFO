@@ -37,10 +37,15 @@ public class MemoryCacheInterceptor implements MethodInterceptor {
 		Object[] arguments = invocation.getArguments();
 		if (arguments != null) {
 			for (int ii = 0; ii < arguments.length; ii++) {
+				Object argument = arguments[ii];
 				if (ii > 0) {
 					key.append(",");
 				}
-				key.append(arguments[ii].toString());
+				if (argument == null) {
+					key.append("null");
+				} else {
+					key.append(argument.toString());
+				}
 			}
 		}
 		key.append(")");

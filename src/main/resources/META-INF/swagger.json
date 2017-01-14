@@ -132,6 +132,32 @@
 				"operationId" : "list",
 				"consumes" : ["application/json"],
 				"produces" : ["*/*"],
+				"parameters" : [{
+						"name" : "city",
+						"in" : "query",
+						"description" : "city",
+						"required" : false,
+						"type" : "string"
+					},{
+						"name" : "state",
+						"in" : "query",
+						"description" : "state",
+						"required" : false,
+						"type" : "string"
+					},{
+						"name" : "zip",
+						"in" : "query",
+						"description" : "zip",
+						"required" : false,
+						"type" : "string"
+					},{
+						"name" : "hasRadiosonde",
+						"in" : "query",
+						"description" : "hasRadiosonde",
+						"required" : false,
+						"type" : "boolean"
+					}
+				],
 				"responses" : {
 					"200" : {
 						"description" : "OK",
