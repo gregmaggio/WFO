@@ -96,4 +96,31 @@ public class StationDAOTester {
 	    	System.out.println("Station: " + dto.getStationId());
 	    }
 	}
+	
+	@Test
+	public void test9() throws Exception {
+		StationDAO dao = new StationDAO();
+	    List<StationDTO> list = dao.list("Google Inc, 1600 Amphitheatre Parkway, Mountain View, CA 94043");
+	    for (StationDTO dto : list) {
+	    	System.out.println("Station: " + dto.getStationId());
+	    }
+	}
+	
+	@Test
+	public void test10() throws Exception {
+		StationDAO dao = new StationDAO();
+	    List<StationDTO> list = dao.list("Mountain View, CA 94043");
+	    for (StationDTO dto : list) {
+	    	System.out.println("Station: " + dto.getStationId());
+	    }
+	}
+	
+	@Test
+	public void test11() throws Exception {
+		StationDAO dao = new StationDAO();
+	    List<StationDTO> list = dao.list("Mountain View, CA");
+	    for (StationDTO dto : list) {
+	    	System.out.println("Station: " + dto.getStationId());
+	    }
+	}
 }

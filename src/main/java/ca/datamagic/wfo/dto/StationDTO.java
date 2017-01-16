@@ -17,7 +17,8 @@ public class StationDTO {
 	private String _streetNumber = null;
 	private String _streetName = null;
 	private String _city = null;
-	private String _state = null;
+	private String _stateCode = null;
+	private String _stateName = null;
 	private String _zip = null;
 	private String _countryCode = null;
 	private String _countryName = null;
@@ -34,7 +35,8 @@ public class StationDTO {
 		_streetNumber = (String)feature.getAttribute("street_no");
 		_streetName = (String)feature.getAttribute("street");
 		_city = (String)feature.getAttribute("city");
-		_state = (String)feature.getAttribute("state");
+		_stateCode = (String)feature.getAttribute("state_cd");
+		_stateName = (String)feature.getAttribute("state_nm");
 		_zip = (String)feature.getAttribute("zip");
 		_countryCode = (String)feature.getAttribute("country_cd");
 		_countryName = (String)feature.getAttribute("country");
@@ -63,8 +65,12 @@ public class StationDTO {
 		return _city;
 	}
 	
-	public String getState() {
-		return _state;
+	public String getStateCode() {
+		return _stateCode;
+	}
+	
+	public String getStateName() {
+		return _stateName;
 	}
 	
 	public String getZip() {
@@ -112,8 +118,12 @@ public class StationDTO {
 		_city = newVal;
 	}
 	
-	public void setState(String newVal) {
-		_state = newVal;
+	public void setStateCode(String newVal) {
+		_stateCode = newVal;
+	}
+	
+	public void setStateName(String newVal) {
+		_stateName = newVal;
 	}
 	
 	public void setZip(String newVal) {

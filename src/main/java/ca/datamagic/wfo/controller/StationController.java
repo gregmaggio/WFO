@@ -70,6 +70,7 @@ public class StationController {
 			String requestURI = requestURL.toString();
 			_logger.debug("requestURI: " + requestURI);			
 			MultiValueMap<String, String> queryParameters = UriComponentsBuilder.fromUri(new URI(requestURI)).build().getQueryParams();
+			String address = null;
 			String city = null;
 			String state = null;
 			String zip = null;
@@ -84,7 +85,9 @@ public class StationController {
 				}
 				if ((value != null) && (value.length() > 0)) {
 					_logger.debug("value: " + value);
-					if (key.compareToIgnoreCase("city") == 0) {
+					if (key.compareToIgnoreCase("address") == 0) {
+						address = value;
+					} else if (key.compareToIgnoreCase("city") == 0) {
 						city = value;
 					} else if (key.compareToIgnoreCase("state") == 0) {
 						state = value;
@@ -94,6 +97,9 @@ public class StationController {
 						hasRadisonde = Boolean.parseBoolean(value);
 					}
 				}
+			}
+			if ((address != null) && (address.length() > 0)) {
+				return _dao.list(address, hasRadisonde);
 			}
 			return _dao.list(city, state, zip, hasRadisonde);
 		} catch (Throwable t) {

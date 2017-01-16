@@ -133,6 +133,12 @@
 				"consumes" : ["application/json"],
 				"produces" : ["*/*"],
 				"parameters" : [{
+						"name" : "address",
+						"in" : "query",
+						"description" : "address",
+						"required" : false,
+						"type" : "string"
+					},{
 						"name" : "city",
 						"in" : "query",
 						"description" : "city",
