@@ -124,6 +124,64 @@
 					}
 				}
 			}
+		},		
+		"/api/station/cities" : {
+			"get" : {
+				"tags" : ["station-controller"],
+				"summary" : "cities",
+				"operationId" : "cities",
+				"consumes" : ["application/json"],
+				"produces" : ["*/*"],
+				"responses" : {
+					"200" : {
+						"description" : "OK",
+						"schema" : {
+							"type" : "array",
+							"items" : {
+								"$ref" : "#/definitions/CityDTO"
+							}
+						}
+					},
+					"401" : {
+						"description" : "Unauthorized"
+					},
+					"403" : {
+						"description" : "Forbidden"
+					},
+					"404" : {
+						"description" : "Not Found"
+					}
+				}
+			}
+		},
+		"/api/station/zips" : {
+			"get" : {
+				"tags" : ["station-controller"],
+				"summary" : "zips",
+				"operationId" : "zips",
+				"consumes" : ["application/json"],
+				"produces" : ["*/*"],
+				"responses" : {
+					"200" : {
+						"description" : "OK",
+						"schema" : {
+							"type" : "array",
+							"items" : {
+								"$ref" : "#/definitions/ZipDTO"
+							}
+						}
+					},
+					"401" : {
+						"description" : "Unauthorized"
+					},
+					"403" : {
+						"description" : "Forbidden"
+					},
+					"404" : {
+						"description" : "Not Found"
+					}
+				}
+			}
 		},
 		"/api/station/list" : {
 			"get" : {
@@ -358,6 +416,31 @@
 				},
 				"hasRadiosonde" : {
 					"type" : "boolean"
+				}
+			}
+		},
+		"CityDTO" : {
+			"type" : "object",
+			"properties" : {
+				"city" : {
+					"type" : "string"
+				},
+				"state" : {
+					"type" : "string"
+				}
+			}
+		},
+		"ZipDTO" : {
+			"type" : "object",
+			"properties" : {
+				"zip" : {
+					"type" : "string"
+				},
+				"city" : {
+					"type" : "string"
+				},
+				"state" : {
+					"type" : "string"
 				}
 			}
 		}

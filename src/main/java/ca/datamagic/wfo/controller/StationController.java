@@ -26,7 +26,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import ca.datamagic.wfo.dao.BaseDAO;
 import ca.datamagic.wfo.dao.StationDAO;
+import ca.datamagic.wfo.dto.CityDTO;
 import ca.datamagic.wfo.dto.StationDTO;
+import ca.datamagic.wfo.dto.ZipDTO;
 import ca.datamagic.wfo.inject.DAOModule;
 
 import com.google.inject.Guice;
@@ -54,6 +56,28 @@ public class StationController {
 			_dao = _injector.getInstance(StationDAO.class);
 		} catch (Throwable t) {
 			_logger.error("Exception", t);
+		}
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/cities", produces="application/json")
+	@ResponseBody
+    public List<CityDTO> cities(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		try {
+			return _dao.cities();
+		} catch (Throwable t) {
+			_logger.error("Exception", t);
+			throw new Exception(t);
+		}
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/zips", produces="application/json")
+	@ResponseBody
+    public List<ZipDTO> zips(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		try {
+			return _dao.zips();
+		} catch (Throwable t) {
+			_logger.error("Exception", t);
+			throw new Exception(t);
 		}
 	}
 	

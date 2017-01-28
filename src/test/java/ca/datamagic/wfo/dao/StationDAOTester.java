@@ -10,7 +10,9 @@ import org.apache.log4j.xml.DOMConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ca.datamagic.wfo.dto.CityDTO;
 import ca.datamagic.wfo.dto.StationDTO;
+import ca.datamagic.wfo.dto.ZipDTO;
 
 /**
  * @author Greg
@@ -121,6 +123,24 @@ public class StationDAOTester {
 	    List<StationDTO> list = dao.list("Mountain View, CA");
 	    for (StationDTO dto : list) {
 	    	System.out.println("Station: " + dto.getStationId());
+	    }
+	}
+	
+	@Test
+	public void test12() throws Exception {
+		StationDAO dao = new StationDAO();
+	    List<CityDTO> cities = dao.cities();
+	    for (CityDTO dto : cities) {
+	    	System.out.println("City: " + dto.getKey());
+	    }
+	}
+	
+	@Test
+	public void test13() throws Exception {
+		StationDAO dao = new StationDAO();
+	    List<ZipDTO> zips = dao.zips();
+	    for (ZipDTO dto : zips) {
+	    	System.out.println("Zip: " + dto.getKey());
 	    }
 	}
 }

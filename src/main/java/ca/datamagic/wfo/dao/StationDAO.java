@@ -6,7 +6,10 @@ package ca.datamagic.wfo.dao;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +31,9 @@ import org.opengis.feature.simple.SimpleFeature;
 
 import com.vividsolutions.jts.geom.Point;
 
+import ca.datamagic.wfo.dto.CityDTO;
 import ca.datamagic.wfo.dto.StationDTO;
+import ca.datamagic.wfo.dto.ZipDTO;
 import ca.datamagic.wfo.inject.MemoryCache;
 
 /**
@@ -53,6 +58,70 @@ public class StationDAO extends BaseDAO {
 		_featureSource = featureSource;
 	}
 
+	@MemoryCache
+	public List<CityDTO> cities() throws IOException, CQLException {
+		SimpleFeatureCollection collection = _featureSource.getFeatures();
+		SimpleFeatureIterator iterator = null;
+		try {
+			Hashtable<String, CityDTO> items = new Hashtable<String, CityDTO>();
+			iterator = collection.features();
+			while (iterator.hasNext()) {
+				StationDTO station = new StationDTO(iterator.next());
+				CityDTO city = new CityDTO(station.getCity(), station.getStateCode());
+				String key = city.getKey();
+				if ((key != null) && (key.length() > 0)) {
+					key = key.toUpperCase();
+					if (!items.containsKey(key)) {
+						items.put(key, city);
+					}
+				}
+			}
+			List<CityDTO> cities = new ArrayList<CityDTO>();
+			Enumeration<CityDTO> citiesEnum = items.elements();
+			while (citiesEnum.hasMoreElements()) {
+				cities.add(citiesEnum.nextElement());
+			}
+			Collections.sort(cities);
+			return cities;
+		} finally {
+			if (iterator != null) {
+				iterator.close();
+			}
+		}
+	}
+	
+	@MemoryCache
+	public List<ZipDTO> zips() throws IOException, CQLException {
+		SimpleFeatureCollection collection = _featureSource.getFeatures();
+		SimpleFeatureIterator iterator = null;
+		try {
+			Hashtable<String, ZipDTO> items = new Hashtable<String, ZipDTO>();
+			iterator = collection.features();
+			while (iterator.hasNext()) {
+				StationDTO station = new StationDTO(iterator.next());
+				ZipDTO zip = new ZipDTO(station.getZip(), station.getCity(), station.getStateCode());
+				String key = zip.getKey();
+				if ((key != null) && (key.length() > 0)) {
+					key = key.toUpperCase();
+					if (!items.containsKey(key)) {
+						items.put(key, zip);
+					}
+				}
+			}
+			List<ZipDTO> zips = new ArrayList<ZipDTO>();
+			Enumeration<ZipDTO> zipsEnum = items.elements();
+			while (zipsEnum.hasMoreElements()) {
+				zips.add(zipsEnum.nextElement());
+			}
+			Collections.sort(zips);
+			return zips;
+		} finally {
+			if (iterator != null) {
+				iterator.close();
+			}
+		}
+	}
+	
 	@MemoryCache
 	public List<StationDTO> list() throws IOException, CQLException {
 		return list(false);
