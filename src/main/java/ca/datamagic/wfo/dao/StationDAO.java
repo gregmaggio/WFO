@@ -144,19 +144,19 @@ public class StationDAO extends BaseDAO {
 			if (filter.length() > 0) {
 				filter.append(" AND ");
 			}
-			filter.append(MessageFormat.format("city = {0}", "'" + city + "'"));
+			filter.append(MessageFormat.format("city like {0}", "'" + city + "%'"));
 		}
 		if ((state != null) && (state.length() > 0)) {
 			if (filter.length() > 0) {
 				filter.append(" AND ");
 			}
-			filter.append(MessageFormat.format("state_cd = {0}", "'" + state + "'"));
+			filter.append(MessageFormat.format("state_cd like {0}", "'" + state + "%'"));
 		}
 		if ((zip != null) && (zip.length() > 0)) {
 			if (filter.length() > 0) {
 				filter.append(" AND ");
 			}
-			filter.append(MessageFormat.format("zip = {0}", "'" + zip + "'"));
+			filter.append(MessageFormat.format("zip like {0}", "'" + zip + "%'"));
 		}
 		if (hasRadisonde) {
 			if (filter.length() > 0) {

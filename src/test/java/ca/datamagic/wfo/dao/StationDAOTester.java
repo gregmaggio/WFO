@@ -84,7 +84,7 @@ public class StationDAOTester {
 	@Test
 	public void test7() throws Exception {
 		StationDAO dao = new StationDAO();
-	    List<StationDTO> list = dao.list("College Park", "MD", null);
+	    List<StationDTO> list = dao.list("college", null, null);
 	    for (StationDTO dto : list) {
 	    	System.out.println("Station: " + dto.getStationId());
 	    }
