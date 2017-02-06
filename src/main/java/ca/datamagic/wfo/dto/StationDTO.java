@@ -40,8 +40,8 @@ public class StationDTO {
 		_zip = (String)feature.getAttribute("zip");
 		_countryCode = (String)feature.getAttribute("country_cd");
 		_countryName = (String)feature.getAttribute("country");
-		_longitude = (Double)feature.getAttribute("latitude");
-		_latitude = (Double)feature.getAttribute("longitude");
+		_longitude = (Double)feature.getAttribute("longitude");
+		_latitude = (Double)feature.getAttribute("latitude");
 		_hasRadiosonde = ((String)feature.getAttribute("has_rad")).compareToIgnoreCase("Y") == 0;
 	}
 	
