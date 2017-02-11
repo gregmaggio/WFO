@@ -8,7 +8,7 @@
 			"name" : "Apache License Version 2.0"
 		}
 	},
-	"host" : "localhost:8081",
+	"host" : "datamagic.ca",
 	"basePath" : "/WFO",
 	"tags" : [{
 			"name" : "wfo-controller",
@@ -403,7 +403,28 @@
 				"stationName" : {
 					"type" : "string"
 				},
-				"state" : {
+				"streetNumber" : {
+					"type" : "string"
+				},
+				"streetName" : {
+					"type" : "string"
+				},
+				"city" : {
+					"type" : "string"
+				},
+				"stateCode" : {
+					"type" : "string"
+				},
+				"stateName" : {
+					"type" : "string"
+				},
+				"countryCode" : {
+					"type" : "string"
+				},
+				"countryName" : {
+					"type" : "string"
+				},
+				"zip" : {
 					"type" : "string"
 				},
 				"latitude" : {
