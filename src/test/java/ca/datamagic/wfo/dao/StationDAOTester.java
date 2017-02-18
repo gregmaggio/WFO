@@ -10,6 +10,8 @@ import org.apache.log4j.xml.DOMConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import ca.datamagic.wfo.dto.CityDTO;
 import ca.datamagic.wfo.dto.StationDTO;
 import ca.datamagic.wfo.dto.ZipDTO;
@@ -32,6 +34,9 @@ public class StationDAOTester {
 		for (StationDTO item : items) {
 			System.out.println("Station: " + item.getStationId());
 		}
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(items);
+		System.out.println("json: " + json);
 	}
 	
 	@Test
@@ -39,6 +44,9 @@ public class StationDAOTester {
 		StationDAO dao = new StationDAO();
 		StationDTO dto = dao.read("KIAD");
 		System.out.println("Station: " + dto.getStationId());
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(dto);
+		System.out.println("json: " + json);
 	}
 	
 	@Test

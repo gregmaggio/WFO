@@ -31,6 +31,7 @@ import ca.datamagic.wfo.dto.StationDTO;
 import ca.datamagic.wfo.dto.ZipDTO;
 import ca.datamagic.wfo.inject.DAOModule;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -122,10 +123,16 @@ public class StationController {
 					}
 				}
 			}
+			List<StationDTO> stations = null;
 			if ((address != null) && (address.length() > 0)) {
-				return _dao.list(address, hasRadisonde);
+				stations = _dao.list(address, hasRadisonde);
+			} else {
+				stations = _dao.list(city, state, zip, hasRadisonde);
 			}
-			return _dao.list(city, state, zip, hasRadisonde);
+			ObjectMapper mapper = new ObjectMapper();
+			String json = mapper.writeValueAsString(stations);
+			_logger.debug(json);
+			return stations;
 		} catch (Throwable t) {
 			_logger.error("Exception", t);
 			throw new Exception(t);

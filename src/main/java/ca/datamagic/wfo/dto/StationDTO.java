@@ -6,6 +6,8 @@ package ca.datamagic.wfo.dto;
 import org.opengis.feature.simple.SimpleFeature;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Point;
 
 /**
  * @author Greg
@@ -30,6 +32,8 @@ public class StationDTO {
 	}
 
 	public StationDTO(SimpleFeature feature) {
+		Point point = (Point)feature.getDefaultGeometry();
+		Coordinate coordinate = point.getCoordinate();
 		_stationId = (String)feature.getAttribute("station_id");
 		_stationName = (String)feature.getAttribute("name");
 		_streetNumber = (String)feature.getAttribute("street_no");
@@ -40,8 +44,8 @@ public class StationDTO {
 		_zip = (String)feature.getAttribute("zip");
 		_countryCode = (String)feature.getAttribute("country_cd");
 		_countryName = (String)feature.getAttribute("country");
-		_longitude = (Double)feature.getAttribute("longitude");
-		_latitude = (Double)feature.getAttribute("latitude");
+		_latitude = coordinate.y;
+		_longitude = coordinate.x;
 		_hasRadiosonde = ((String)feature.getAttribute("has_rad")).compareToIgnoreCase("Y") == 0;
 	}
 	
@@ -85,10 +89,12 @@ public class StationDTO {
 		return _countryName;
 	}
 	
+	@JsonProperty(value = "latitude")
 	public Double getLatitude() {
 		return _latitude;
 	}
 	
+	@JsonProperty(value = "longitude")
 	public Double getLongitude() {
 		return _longitude;
 	}
@@ -138,10 +144,12 @@ public class StationDTO {
 		_countryName = newVal;
 	}
 	
+	@JsonProperty(value = "latitude")
 	public void setLatitude(Double newVal) {
 		_latitude = newVal;
 	}
 	
+	@JsonProperty(value = "longitude")
 	public void setLongitude(Double newVal) {
 		_longitude = newVal;
 	}
