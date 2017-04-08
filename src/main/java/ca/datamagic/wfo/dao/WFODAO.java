@@ -65,7 +65,7 @@ public class WFODAO extends BaseDAO {
 	
 	@MemoryCache
 	public WFODTO read(String id) throws IOException, CQLException {
-		String filter = MessageFormat.format("WFO = {0}", "'" + id + "'");
+		String filter = MessageFormat.format("WFO = {0}", "'" + id.toUpperCase() + "'");
 		_logger.debug("filter: " + filter);
 		Query query = new Query(_typeName, CQL.toFilter(filter));
 		SimpleFeatureCollection collection = _featureSource.getFeatures(query);

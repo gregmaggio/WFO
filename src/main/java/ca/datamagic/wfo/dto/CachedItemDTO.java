@@ -3,6 +3,8 @@
  */
 package ca.datamagic.wfo.dto;
 
+import java.util.List;
+
 /**
  * @author Greg
  *
@@ -10,13 +12,9 @@ package ca.datamagic.wfo.dto;
 public class CachedItemDTO {
 	private String _key = null;
 	private WFODTO _wfo = null;
+	private List<WFODTO> _wfos = null;
 	
 	public CachedItemDTO() {
-	}
-
-	public CachedItemDTO(String key, WFODTO wfo) {
-		_key = key;
-		_wfo = wfo;
 	}
 	
 	public String getKey() {
@@ -33,5 +31,13 @@ public class CachedItemDTO {
 	
 	public void setWFO(WFODTO newVal) {
 		_wfo = newVal;
+	}
+	
+	public List<WFODTO> getWFOList() {
+		return _wfos;
+	}
+	
+	public void setWFOList(List<WFODTO> newVal) {
+		_wfos = newVal;
 	}
 }
