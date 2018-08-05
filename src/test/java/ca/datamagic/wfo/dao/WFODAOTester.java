@@ -10,6 +10,8 @@ import org.apache.log4j.xml.DOMConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import ca.datamagic.wfo.dto.WFODTO;
 
 /**
@@ -27,8 +29,9 @@ public class WFODAOTester {
 	public void test1() throws Exception {
 		WFODAO dao = new WFODAO();
 		List<WFODTO> items = dao.list();
+		ObjectMapper mapper = new ObjectMapper();
 		for (WFODTO item : items) {
-			System.out.println("WFO: " + item.getWFO());
+			System.out.println("WFO: " + mapper.writeValueAsString(item));
 		}
 	}
 	

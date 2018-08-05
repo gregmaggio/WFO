@@ -12,6 +12,8 @@ public class WFODTO {
 	private String _cityState = null;
 	private String _city = null;
 	private String _state = null;
+	private String _stateAbbreviation = null;
+	private String _radar = null;
 	
 	public WFODTO() {
 	}
@@ -21,11 +23,13 @@ public class WFODTO {
 		_wfo = (String)feature.getAttribute("WFO");
 		_longitude = (Double)feature.getAttribute("LON");
 		_latitude = (Double)feature.getAttribute("LAT");
-		_region = (String)feature.getAttribute("Region");
-		_fullStationId = (String)feature.getAttribute("FullStaId");
-		_cityState = (String)feature.getAttribute("CityState");
-		_city = (String)feature.getAttribute("City");
-		_state = (String)feature.getAttribute("State");
+		_region = (String)feature.getAttribute("REGION");
+		_fullStationId = (String)feature.getAttribute("FULLSTAID");
+		_cityState = (String)feature.getAttribute("CITYSTATE");
+		_city = (String)feature.getAttribute("CITY");
+		_state = (String)feature.getAttribute("STATE");
+		_stateAbbreviation = (String)feature.getAttribute("ST");
+		_radar = (String)feature.getAttribute("RADAR");
 	}
 	
 	public String getCWA() {
@@ -64,6 +68,14 @@ public class WFODTO {
 		return _state;
 	}
 	
+	public String getStateAbbreviation() {
+		return _stateAbbreviation;
+	}
+	
+	public String getRadar() {
+		return _radar;
+	}
+	
 	public void setCWA(String newVal) {
 		_cwa = newVal;
 	}
@@ -98,5 +110,13 @@ public class WFODTO {
 	
 	public void setState(String newVal) {
 		_state = newVal;
+	}
+	
+	public void setStateAbbreviation(String newVal) {
+		_stateAbbreviation = newVal;
+	}
+	
+	public void setRadar(String newVal) {
+		_radar = newVal;
 	}
 }
