@@ -46,11 +46,19 @@ public class WFODAO extends BaseDAO {
 	}
 	
 	@MemoryCache
-	public List<WFODTO> list() throws IOException {		
-		SimpleFeatureCollection collection = _featureSource.getFeatures();
+	public List<WFODTO> list(String state) throws IOException, CQLException {		
+		SimpleFeatureCollection collection = null;
 		SimpleFeatureIterator iterator = null;
 		try {
 			List<WFODTO> items = new ArrayList<WFODTO>();
+			if ((state == null) || (state.length() < 1)) {
+				collection = _featureSource.getFeatures();				
+			} else {
+				String filter = MessageFormat.format("ST = {0}", "'" + state.toUpperCase() + "'");
+				_logger.debug("filter: " + filter);
+				Query query = new Query(_typeName, CQL.toFilter(filter));
+				collection = _featureSource.getFeatures(query);
+			}
 			iterator = collection.features();
 			while (iterator.hasNext()) {
 				items.add(new WFODTO(iterator.next()));

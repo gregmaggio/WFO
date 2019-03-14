@@ -10,34 +10,34 @@ import java.util.List;
  *
  */
 public class CachedItemDTO {
-	private String _key = null;
-	private WFODTO _wfo = null;
-	private List<WFODTO> _wfos = null;
+	private String key = null;
+	private WFODTO wfo = null;
+	private List<WFODTO> wfos = null;
 	
 	public CachedItemDTO() {
 	}
 	
 	public String getKey() {
-		return _key;
+		return this.key;
 	}
 	
 	public void setKey(String newVal) {
-		_key = newVal;
+		this.key = newVal;
 	}
 	
 	public WFODTO getWFO() {
-		return _wfo;
+		return this.wfo;
 	}
 	
 	public void setWFO(WFODTO newVal) {
-		_wfo = newVal;
+		this.wfo = newVal;
 	}
 	
 	public List<WFODTO> getWFOList() {
-		return _wfos;
+		return this.wfos;
 	}
 	
 	public void setWFOList(List<WFODTO> newVal) {
-		_wfos = newVal;
+		this.wfos = newVal;
 	}
 }

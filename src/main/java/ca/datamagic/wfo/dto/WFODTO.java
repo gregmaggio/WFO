@@ -3,120 +3,120 @@ package ca.datamagic.wfo.dto;
 import org.opengis.feature.simple.SimpleFeature;
 
 public class WFODTO {
-	private String _cwa = null;
-	private String _wfo = null;
-	private Double _latitude = null;
-	private Double _longitude = null;
-	private String _region = null;
-	private String _fullStationId = null;
-	private String _cityState = null;
-	private String _city = null;
-	private String _state = null;
-	private String _stateAbbreviation = null;
-	private String _radar = null;
+	private String cwa = null;
+	private String wfo = null;
+	private Double latitude = null;
+	private Double longitude = null;
+	private String region = null;
+	private String fullStationId = null;
+	private String cityState = null;
+	private String city = null;
+	private String state = null;
+	private String stateAbbreviation = null;
+	private String radar = null;
 	
 	public WFODTO() {
 	}
 
 	public WFODTO(SimpleFeature feature) {
-		_cwa = (String)feature.getAttribute("CWA");
-		_wfo = (String)feature.getAttribute("WFO");
-		_longitude = (Double)feature.getAttribute("LON");
-		_latitude = (Double)feature.getAttribute("LAT");
-		_region = (String)feature.getAttribute("REGION");
-		_fullStationId = (String)feature.getAttribute("FULLSTAID");
-		_cityState = (String)feature.getAttribute("CITYSTATE");
-		_city = (String)feature.getAttribute("CITY");
-		_state = (String)feature.getAttribute("STATE");
-		_stateAbbreviation = (String)feature.getAttribute("ST");
-		_radar = (String)feature.getAttribute("RADAR");
+		this.cwa = (String)feature.getAttribute("CWA");
+		this.wfo = (String)feature.getAttribute("WFO");
+		this.longitude = (Double)feature.getAttribute("LON");
+		this.latitude = (Double)feature.getAttribute("LAT");
+		this.region = (String)feature.getAttribute("REGION");
+		this.fullStationId = (String)feature.getAttribute("FULLSTAID");
+		this.cityState = (String)feature.getAttribute("CITYSTATE");
+		this.city = (String)feature.getAttribute("CITY");
+		this.state = (String)feature.getAttribute("STATE");
+		this.stateAbbreviation = (String)feature.getAttribute("ST");
+		this.radar = (String)feature.getAttribute("RADAR");
 	}
 	
 	public String getCWA() {
-		return _cwa;
+		return this.cwa;
 	}
 	
 	public String getWFO() {
-		return _wfo;
+		return this.wfo;
 	}
 	
 	public Double getLatitude() {
-		return _latitude;
+		return this.latitude;
 	}
 	
 	public Double getLongitude() {
-		return _longitude;
+		return this.longitude;
 	}
 	
 	public String getRegion() {
-		return _region;
+		return this.region;
 	}
 	
 	public String getFullStationId() {
-		return _fullStationId;
+		return this.fullStationId;
 	}
 	
 	public String getCityState() {
-		return _cityState;
+		return this.cityState;
 	}
 	
 	public String getCity() {
-		return _city;
+		return this.city;
 	}
 	
 	public String getState() {
-		return _state;
+		return this.state;
 	}
 	
 	public String getStateAbbreviation() {
-		return _stateAbbreviation;
+		return this.stateAbbreviation;
 	}
 	
 	public String getRadar() {
-		return _radar;
+		return this.radar;
 	}
 	
 	public void setCWA(String newVal) {
-		_cwa = newVal;
+		this.cwa = newVal;
 	}
 	
 	public void setWFO(String newVal) {
-		_wfo = newVal;
+		this.wfo = newVal;
 	}
 	
 	public void setLatitude(Double newVal) {
-		_latitude = newVal;
+		this.latitude = newVal;
 	}
 	
 	public void setLongitude(Double newVal) {
-		_longitude = newVal;
+		this.longitude = newVal;
 	}
 	
 	public void setRegion(String newVal) {
-		_region = newVal;
+		this.region = newVal;
 	}
 	
 	public void setFullStationId(String newVal) {
-		_fullStationId = newVal;
+		this.fullStationId = newVal;
 	}
 	
 	public void setCityState(String newVal) {
-		_cityState = newVal;
+		this.cityState = newVal;
 	}
 	
 	public void setCity(String newVal) {
-		_city = newVal;
+		this.city = newVal;
 	}
 	
 	public void setState(String newVal) {
-		_state = newVal;
+		this.state = newVal;
 	}
 	
 	public void setStateAbbreviation(String newVal) {
-		_stateAbbreviation = newVal;
+		this.stateAbbreviation = newVal;
 	}
 	
 	public void setRadar(String newVal) {
-		_radar = newVal;
+		this.radar = newVal;
 	}
 }
