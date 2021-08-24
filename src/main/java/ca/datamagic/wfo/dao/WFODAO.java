@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.geotools.data.DataStore;
 import org.geotools.data.DataStoreFinder;
 import org.geotools.data.Query;
@@ -28,21 +28,21 @@ import ca.datamagic.wfo.inject.MemoryCache;
  *
  */
 public class WFODAO extends BaseDAO {
-	private static Logger _logger = LogManager.getLogger(WFODAO.class);
-	private String _fileName = null;
-	private String _typeName = null; 
-	private SimpleFeatureSource _featureSource = null;
+	private static Logger logger = LogManager.getLogger(WFODAO.class);
+	private String fileName = null;
+	private String typeName = null; 
+	private SimpleFeatureSource featureSource = null;
 	
 	public WFODAO() throws IOException {
-		_fileName = MessageFormat.format("{0}/w_10nv15/w_10nv15.shp", getDataPath());
+		this.fileName = MessageFormat.format("{0}/w_10nv15/w_10nv15.shp", getDataPath());
 		HashMap<Object, Object> connect = new HashMap<Object, Object>();
-		connect.put("url", "file://" + _fileName);
+		connect.put("url", "file://" + this.fileName);
 		DataStore dataStore = DataStoreFinder.getDataStore(connect);
 		String[] typeNames = dataStore.getTypeNames();
 		String typeName = typeNames[0];
 		SimpleFeatureSource featureSource = dataStore.getFeatureSource(typeName);
-		_typeName = typeName;
-		_featureSource = featureSource;
+		this.typeName = typeName;
+		this.featureSource = featureSource;
 	}
 	
 	@MemoryCache
@@ -52,12 +52,12 @@ public class WFODAO extends BaseDAO {
 		try {
 			List<WFODTO> items = new ArrayList<WFODTO>();
 			if ((state == null) || (state.length() < 1)) {
-				collection = _featureSource.getFeatures();				
+				collection = this.featureSource.getFeatures();				
 			} else {
 				String filter = MessageFormat.format("ST = {0}", "'" + state.toUpperCase() + "'");
-				_logger.debug("filter: " + filter);
-				Query query = new Query(_typeName, CQL.toFilter(filter));
-				collection = _featureSource.getFeatures(query);
+				logger.debug("filter: " + filter);
+				Query query = new Query(this.typeName, CQL.toFilter(filter));
+				collection = this.featureSource.getFeatures(query);
 			}
 			iterator = collection.features();
 			while (iterator.hasNext()) {
@@ -74,9 +74,9 @@ public class WFODAO extends BaseDAO {
 	@MemoryCache
 	public WFODTO read(String id) throws IOException, CQLException {
 		String filter = MessageFormat.format("WFO = {0}", "'" + id.toUpperCase() + "'");
-		_logger.debug("filter: " + filter);
-		Query query = new Query(_typeName, CQL.toFilter(filter));
-		SimpleFeatureCollection collection = _featureSource.getFeatures(query);
+		logger.debug("filter: " + filter);
+		Query query = new Query(this.typeName, CQL.toFilter(filter));
+		SimpleFeatureCollection collection = this.featureSource.getFeatures(query);
 		SimpleFeatureIterator iterator = null;
 		try {
 			iterator = collection.features();
@@ -94,9 +94,9 @@ public class WFODAO extends BaseDAO {
 	@MemoryCache
 	public List<WFODTO> read(double latitude, double longitude) throws IOException, CQLException {
 		String filter = MessageFormat.format("CONTAINS (the_geom, POINT({0} {1}))", Double.toString(longitude), Double.toString(latitude));
-		_logger.debug("filter: " + filter);
-		Query query = new Query(_typeName, CQL.toFilter(filter));
-		SimpleFeatureCollection collection = _featureSource.getFeatures(query);
+		logger.debug("filter: " + filter);
+		Query query = new Query(this.typeName, CQL.toFilter(filter));
+		SimpleFeatureCollection collection = this.featureSource.getFeatures(query);
 		SimpleFeatureIterator iterator = null;
 		try {
 			List<WFODTO> items = new ArrayList<WFODTO>();

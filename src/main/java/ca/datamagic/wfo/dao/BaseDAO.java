@@ -8,13 +8,13 @@ package ca.datamagic.wfo.dao;
  *
  */
 public class BaseDAO {
-	private static String _dataPath = "C:/Dev/Applications/WFO/src/main/resources/data";
+	private static String dataPath = "C:/Dev/Applications/WFO/src/main/resources/data";
 	
 	public static String getDataPath() {
-		return _dataPath;
+		return dataPath;
 	}
 	
 	public static void setDataPath(String newVal) {
-		_dataPath = newVal;
+		dataPath = newVal;
 	}
 }

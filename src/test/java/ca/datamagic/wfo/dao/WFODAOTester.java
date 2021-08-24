@@ -6,7 +6,6 @@ package ca.datamagic.wfo.dao;
 import java.io.File;
 import java.util.List;
 
-import org.apache.log4j.xml.DOMConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -21,7 +20,6 @@ import ca.datamagic.wfo.dto.WFODTO;
 public class WFODAOTester {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		DOMConfigurator.configure("src/test/resources/log4j.cfg.xml");
 		BaseDAO.setDataPath((new File("src/test/resources/data")).getAbsolutePath());
 	}
 
